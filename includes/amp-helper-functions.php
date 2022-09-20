@@ -528,6 +528,18 @@ function amp_is_available() {
 		return false;
 	}
 
+	/**
+	 * Filter to force amp to be enabled.
+	 *
+	 * @param array The query arguments.
+	 *
+	 * @return bool
+	 */
+	$is_amp_forced = apply_filters( 'amp_force_enabled', $wp_query->query );
+	if ( $is_amp_forced ) {
+		return $is_amp_forced;
+	}
+
 	$queried_object = get_queried_object();
 	if ( ! $is_legacy ) {
 		// Abort if in Transitional mode and AMP is not available for the URL.
